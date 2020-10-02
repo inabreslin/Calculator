@@ -3,6 +3,7 @@ from tkinter import *
 #define window
 window = Tk()
 window.title("Calculator")
+window.iconbitmap(r"C:\Users\Proteus\Desktop\Calculator\calculator.ico")
 
 #define top entry box
 Entry_Box = Entry(window, font = "calibri 18",  width = 20)
@@ -69,11 +70,6 @@ def button_divide():
 def button_clear():
     Entry_Box.delete(0, END)
 
-def button_exit():
-    window.destroy()
-    return
-
-
 #define buttons
 Button0 = Button(window, width = 5, text = "0", activebackground = "light steel blue", bg = "light blue", bd = 3, padx = 20, pady = 20, command = lambda: num_button_click(0))
 Button1 = Button(window, width = 5, text = "1", activebackground = "light steel blue", bg = "light blue", bd = 3, padx = 20, pady = 20, command = lambda: num_button_click(1))
@@ -95,7 +91,7 @@ Divide_Button = Button(window, width = 5, text = "/", activebackground = "steel 
 
 Clear_Button = Button(window, width = 5, text = "Clear", activebackground = "steel blue", bg = "deep sky blue", bd = 3, padx = 20, pady = 20, command = button_clear)
 
-Exit_Button = Button(window, width = 5, text = "Exit", activebackground = "red3", bg = "red", bd = 3, padx = 21, pady = 20, command = button_exit)
+Exit_Button = Button(window, width = 5, text = "Exit", activebackground = "red3", bg = "red", bd = 3, padx = 21, pady = 20, command = window.quit)
 
 #button positioning
 Button0.grid(row = 4, column = 1)
