@@ -75,7 +75,7 @@ def button_divide():
     button_clear()
 
 def button_backspace():
-    current = str(Entry_Box.get())
+    current = Entry_Box.get()
     length = len(current)
     if (length != 0):
         Entry_Box.delete(length-1, END)
