@@ -41,6 +41,12 @@ def button_equal():
 def button_dot():
     Entry_Box.insert(END, ".")
 
+def button_open_bracket():
+    Entry_Box.insert(END, "(")
+
+def button_close_bracket():
+    Entry_Box.insert(END, ")")
+
 def button_minus():
     Entry_Box.insert(END, "-")
 
@@ -60,6 +66,15 @@ def button_power():
     global current_operation
     current_operation = "power"
     button_clear()
+
+def button_factorial():
+    current = int(Entry_Box.get())
+    button_clear()
+    factorial = 1
+    if current != 1:
+        for i in range(1, current+1):
+            factorial = factorial * i
+    Entry_Box.insert(0, factorial)
 
 def button_add():
     operator()
@@ -109,11 +124,14 @@ Button9 = Button(window, width = 5, text = "9", activebackground = "light steel 
 
 Equal_Button = Button(window, width = 5, text = "=", activebackground = "steel blue", bg = "deep sky blue", bd = 3, padx = 21, pady = 20, command = button_equal)
 Dot_Button = Button(window, width = 5, text = ".", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_dot)
+Open_Bracket_Button = Button(window, width = 5, text = "(", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_open_bracket)
+Close_Bracket_Button = Button(window, width = 5, text = ")", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_close_bracket)
 Minus_Button = Button(window, width = 5, text = "(-)", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_minus)
 
 
 Reciprocal_Button = Button(window, width = 5, text = "1/X", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_reciprocal)
 Power_Button = Button(window, width = 5, text = "X^Y", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_power)
+Factorial_Button = Button(window, width = 5, text = "X!", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 21, pady = 20, command = button_factorial)
 
 Add_Button = Button(window, width = 5, text = "+", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 21, pady = 20, command = button_add)
 Subtract_Button = Button(window, width = 5, text = "-", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 21, pady = 20, command = button_subtract)
@@ -137,20 +155,23 @@ Button7.grid(row = 1, column = 0)
 Button8.grid(row = 1, column = 1)
 Button9.grid(row = 1, column = 2)
 
-Equal_Button.grid(row = 5, column = 3)
-Dot_Button.grid(row = 5, column = 0)
-Minus_Button.grid(row = 5, column = 2)
+Equal_Button.grid(row = 6, column = 3)
+Dot_Button.grid(row = 4, column = 0)
+Open_Bracket_Button.grid(row = 6, column = 0)
+Close_Bracket_Button.grid(row = 6, column = 2)
+Minus_Button.grid(row = 4, column = 2)
 
 Reciprocal_Button.grid(row = 5, column = 1)
 Power_Button.grid(row = 6, column = 1)
+Factorial_Button.grid(row = 5, column = 3)
 
 Add_Button.grid(row = 1, column = 3)
 Subtract_Button.grid(row = 2, column = 3)
 Multiply_Button.grid(row = 3, column = 3)
 Divide_Button.grid(row = 4, column = 3)
 
-Backspace_Button.grid(row = 4, column = 0)
-Clear_Button.grid(row = 4, column = 2)
+Backspace_Button.grid(row = 5, column = 0)
+Clear_Button.grid(row = 5, column = 2)
 
 Exit_Button.grid(row = 0, column = 3)
 
