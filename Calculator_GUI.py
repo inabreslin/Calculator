@@ -34,10 +34,15 @@ def button_equal():
         Entry_Box.insert(0, first_number * float(current_num))
     elif current_operation == "divide":
         Entry_Box.insert(0, first_number / float(current_num))
+    elif current_operation == "power":
+        Entry_Box.insert(0, pow(first_number, float(current_num)))
     current_operation = "none"
 
 def button_dot():
     Entry_Box.insert(END, ".")
+
+def button_minus():
+    Entry_Box.insert(END, "-")
 
 def button_reciprocal():
     current = float(Entry_Box.get())
@@ -49,6 +54,12 @@ def operator():
     if current_operation != "none":
         button_equal()
     first_number = float(Entry_Box.get())
+
+def button_power():
+    operator()
+    global current_operation
+    current_operation = "power"
+    button_clear()
 
 def button_add():
     operator()
@@ -96,10 +107,13 @@ Button7 = Button(window, width = 5, text = "7", activebackground = "light steel 
 Button8 = Button(window, width = 5, text = "8", activebackground = "light steel blue", bg = "light blue", bd = 3, padx = 20, pady = 20, command = lambda: num_button_click(8))
 Button9 = Button(window, width = 5, text = "9", activebackground = "light steel blue", bg = "light blue", bd = 3, padx = 20, pady = 20, command = lambda: num_button_click(9))
 
-Equal_Button = Button(window, width = 5, text = "=", activebackground = "steel blue", bg = "deep sky blue", bd = 3, padx = 20, pady = 20, command = button_equal)
+Equal_Button = Button(window, width = 5, text = "=", activebackground = "steel blue", bg = "deep sky blue", bd = 3, padx = 21, pady = 20, command = button_equal)
 Dot_Button = Button(window, width = 5, text = ".", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_dot)
+Minus_Button = Button(window, width = 5, text = "(-)", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_minus)
+
 
 Reciprocal_Button = Button(window, width = 5, text = "1/X", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_reciprocal)
+Power_Button = Button(window, width = 5, text = "X^Y", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_power)
 
 Add_Button = Button(window, width = 5, text = "+", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 21, pady = 20, command = button_add)
 Subtract_Button = Button(window, width = 5, text = "-", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 21, pady = 20, command = button_subtract)
@@ -107,7 +121,7 @@ Multiply_Button = Button(window, width = 5, text = "*", activebackground = "stee
 Divide_Button = Button(window, width = 5, text = "/", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 21, pady = 20, command = button_divide)
 
 Backspace_Button = Button(window, width = 5, text = "Backspace", activebackground = "steel blue", bg = "deep sky blue", bd = 3, padx = 20, pady = 20, command = button_backspace)
-Clear_Button = Button(window, width = 5, text = "Clear", activebackground = "steel blue", bg = "deep sky blue", bd = 3, padx = 21, pady = 20, command = button_clear)
+Clear_Button = Button(window, width = 5, text = "Clear", activebackground = "steel blue", bg = "deep sky blue", bd = 3, padx = 20, pady = 20, command = button_clear)
 
 Exit_Button = Button(window, width = 5, text = "Exit", activebackground = "red3", bg = "red", bd = 3, padx = 21, pady = 20, command = window.quit)
 
@@ -123,10 +137,12 @@ Button7.grid(row = 1, column = 0)
 Button8.grid(row = 1, column = 1)
 Button9.grid(row = 1, column = 2)
 
-Equal_Button.grid(row = 4, column = 2)
-Dot_Button.grid(row = 5, column = 1)
+Equal_Button.grid(row = 5, column = 3)
+Dot_Button.grid(row = 5, column = 0)
+Minus_Button.grid(row = 5, column = 2)
 
-Reciprocal_Button.grid(row = 5, column = 0)
+Reciprocal_Button.grid(row = 5, column = 1)
+Power_Button.grid(row = 6, column = 1)
 
 Add_Button.grid(row = 1, column = 3)
 Subtract_Button.grid(row = 2, column = 3)
@@ -134,7 +150,7 @@ Multiply_Button.grid(row = 3, column = 3)
 Divide_Button.grid(row = 4, column = 3)
 
 Backspace_Button.grid(row = 4, column = 0)
-Clear_Button.grid(row = 5, column = 3)
+Clear_Button.grid(row = 4, column = 2)
 
 Exit_Button.grid(row = 0, column = 3)
 
