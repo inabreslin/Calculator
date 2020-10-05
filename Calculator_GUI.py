@@ -1,4 +1,5 @@
 from tkinter import *
+from math import *
 
 #define window
 window = Tk()
@@ -12,31 +13,28 @@ Entry_Box = Entry(window, font = "calibri 18",  width = 20)
 Entry_Box.grid(row = 0, column = 0, columnspan = 3)
 
 #define global variables
-global current_operation
-current_operation = "none"
+global new
+new = 0
 
 #function definitions
 def num_button_click(number):
+    global new
     current = Entry_Box.get()
     button_clear()
-    Entry_Box.insert(0, current + str(number))
+    if new == 0:
+        Entry_Box.insert(0, str(number))
+        new = 1
+    else:
+        Entry_Box.insert(0, current + str(number))
+    
 
 def button_equal():
-    global first_number
-    global current_operation
-    current_num = Entry_Box.get()
+    global new
+    current_equation = Entry_Box.get()
     button_clear()
-    if current_operation == "addition":
-        Entry_Box.insert(0, first_number + float(current_num))
-    elif current_operation == "subtract":
-        Entry_Box.insert(0, first_number - float(current_num))
-    elif current_operation == "multiply":
-        Entry_Box.insert(0, first_number * float(current_num))
-    elif current_operation == "divide":
-        Entry_Box.insert(0, first_number / float(current_num))
-    elif current_operation == "power":
-        Entry_Box.insert(0, pow(first_number, float(current_num)))
-    current_operation = "none"
+    Entry_Box.insert(0, eval(current_equation))
+    new = 0
+
 
 def button_dot():
     Entry_Box.insert(END, ".")
@@ -55,17 +53,10 @@ def button_reciprocal():
     button_clear()
     Entry_Box.insert(0, 1/current)
 
-def operator():
-    global first_number
-    if current_operation != "none":
-        button_equal()
-    first_number = float(Entry_Box.get())
-
-def button_power():
-    operator()
-    global current_operation
-    current_operation = "power"
+def button_root():
+    current = float(Entry_Box.get())
     button_clear()
+    Entry_Box.insert(0, sqrt(current))
 
 def button_factorial():
     current = int(Entry_Box.get())
@@ -74,31 +65,19 @@ def button_factorial():
     if current != 1:
         for i in range(1, current+1):
             factorial = factorial * i
-    Entry_Box.insert(0, factorial)
+    Entry_Box.insert(0, float(factorial))
 
 def button_add():
-    operator()
-    global current_operation
-    current_operation = "addition"
-    button_clear()
+    Entry_Box.insert(END, "+")
 
 def button_subtract():
-    operator()
-    global current_operation
-    current_operation = "subtract"
-    button_clear()
+    Entry_Box.insert(END, "-")
 
 def button_multiply():
-    operator()
-    global current_operation
-    current_operation = "multiply"
-    button_clear()
+    Entry_Box.insert(END, "*")
 
 def button_divide():
-    operator()
-    global current_operation
-    current_operation = "divide"
-    button_clear()
+    Entry_Box.insert(END, "/")
 
 def button_backspace():
     current = Entry_Box.get()
@@ -130,7 +109,7 @@ Minus_Button = Button(window, width = 5, text = "(-)", activebackground = "steel
 
 
 Reciprocal_Button = Button(window, width = 5, text = "1/X", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_reciprocal)
-Power_Button = Button(window, width = 5, text = "X^Y", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_power)
+Root_Button = Button(window, width = 5, text = "sqrt(X)", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 20, pady = 20, command = button_root)
 Factorial_Button = Button(window, width = 5, text = "X!", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 21, pady = 20, command = button_factorial)
 
 Add_Button = Button(window, width = 5, text = "+", activebackground = "steel blue", bg = "sky blue", bd = 3, padx = 21, pady = 20, command = button_add)
@@ -162,7 +141,7 @@ Close_Bracket_Button.grid(row = 6, column = 2)
 Minus_Button.grid(row = 4, column = 2)
 
 Reciprocal_Button.grid(row = 5, column = 1)
-Power_Button.grid(row = 6, column = 1)
+Root_Button.grid(row = 6, column = 1)
 Factorial_Button.grid(row = 5, column = 3)
 
 Add_Button.grid(row = 1, column = 3)
